@@ -74,15 +74,15 @@ def generate_batch_data(data, batch_size=16):
 def load_data(batch_size=None):
     assert batch_size is not None
     data = {}
-    path = Path('/content/citation_classification') # root path
+    path = Path('./') # root path
     train_set = pd.read_csv(path / 'dataset/SDP_train.csv', sep=',')
     test = pd.read_csv(path / 'dataset/SDP_test.csv', sep=',').merge(
         pd.read_csv(path / 'dataset/sample_submission.csv'), on='unique_id')
     train_set = sklearn.utils.shuffle(train_set, random_state=0).reset_index(drop=True)
-    train = train_set.loc[:int(train_set.shape[0] * 0.2) - 1]
+    train = train_set.loc[:int(train_set.shape[0] * 0.8) - 1]
     print(train['citation_class_label'].value_counts())
     print(collections.Counter(train['citation_class_label']).items())
-    val = (train_set.loc[int(train_set.shape[0] * 0.2):]).reset_index(drop=True)
+    val = (train_set.loc[int(train_set.shape[0] * 0.8):]).reset_index(drop=True)
 
     reverse_data = reverse_sampler(train)
     reverse_data = delete_aug(reverse_data)

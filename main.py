@@ -75,7 +75,7 @@ def main_run(path, dev):
 if __name__ == "__main__":
     tst = time.time()
     device = torch.device("cuda:0" if torch.cuda.is_available() else 'cpu')
-    run_optuna('/content/citation_classification/citation_mul_rev_model.pth', device)
-    # main_run('/content/citation_classification/citation_mul_rev_model.pth', device)
+    # run_optuna('CitationIntentClassification/citation_mul_rev_model.pth', device)
+    main_run('CitationIntentClassification/citation_mul_rev_model.pth', device)
     ten = time.time()
     print('Total time: {}'.format((ten - tst)))
