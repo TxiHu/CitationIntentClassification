@@ -25,10 +25,11 @@ def run_optuna(path, dev):
         n_epoch = trial.suggest_int('n_epoch',140, 170, log=True)
         lr = trial.suggest_float('lr', 1e-4, 1e-3, log=True)
         au_weight = trial.suggest_float('au_weight', 0.001, 0.01, log=True)
+        beta = trial.suggest_float('beta', 0, 1, log=True)
         optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=2e-4)
         scheduler = WarmupMultiStepLR(optimizer, [90, 110], gamma=0.1, warmup_epochs=5)
         best_model_f1, best_epoch = dataset_train(model, token, dataset, criterion, optimizer, n_epoch, au_weight, dev,
-                                                    scheduler, model_path=path)
+                                                    scheduler, model_path=path,beta=beta)
 
         return best_model_f1
     study = optuna.create_study(study_name='studyname', direction='maximize', storage='sqlite:///optuna.db', load_if_exists=True)
