@@ -11,7 +11,7 @@ to extract the required parts of the jsonl file into a new csv file.
 1. The run_optuna function is run in the main.py file and is used to find the right combination of hyperparameters.
 2. Record the final combination of hyperparameters output in the function for the next step of training.
 
-#### Training
+### Training
 Run the main_run function in the main.py file. Train the model on the training set and also generate a file of the prediction results for the test set.
 
 ## Note
